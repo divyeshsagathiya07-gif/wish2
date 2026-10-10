@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family:Arial, sans-serif;
+    background:
+        radial-gradient(circle at center,#35105c 0%,#12001f 45%,#020006 100%);
+    color:white;
+}
+
+/* =========================
+   BACKGROUND HEARTS
+========================= */
+.background-hearts{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:1;
+}
+
+.bg-heart{
+    position:absolute;
+    bottom:-80px;
+    font-size:30px;
+    opacity:.25;
+    filter:drop-shadow(0 0 8px #ff4da6);
+    animation:bgHeartFloat linear infinite;
+}
+
+@keyframes bgHeartFloat{
+    0%{
+        transform:translateY(0) translateX(0) rotate(0deg) scale(.6);
+        opacity:0;
+    }
+    10%{opacity:.35;}
+    50%{
+        transform:translateY(-50vh) translateX(40px) rotate(25deg) scale(1);
+    }
+    100%{
+        transform:translateY(-115vh) translateX(-40px) rotate(-25deg) scale(.7);
+        opacity:0;
+    }
+}
+
+/* =========================
+   STARS
+========================= */
+.stars{
+    position:fixed;
+    inset:0;
+    background-image:
+        radial-gradient(white 1px,transparent 1px),
+        radial-gradient(#ffffff 1px,transparent 1px);
+    background-size:70px 70px,120px 120px;
+    animation:starsMove 15s linear infinite;
+    opacity:.6;
+    pointer-events:none;
+    z-index:2;
+}
+
+@keyframes starsMove{
+    from{transform:translateY(0);}
+    to{transform:translateY(100px);}
+}
+
+/* =========================
+   INTRO SCREEN
+========================= */
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:radial-gradient(circle,#4b0c61,#090014);
+    animation:introHide 3s forwards;
+    animation-delay:4s;
+    pointer-events:none;
+}
+
+.intro-heart{
+    font-size:100px;
+    animation:heartBeat .8s infinite,introZoom 3s;
+}
+
+.intro h1{
+    margin-top:20px;
+    font-size:clamp(30px,7vw,70px);
+    color:white;
+    text-shadow:0 0 10px #ff4da6,0 0 30px #ff0080,0 0 60px #ff0080;
+    animation:textAppear 2s;
+}
+
+.intro p{
+    margin-top:15px;
+    color:#ffd5ed;
+    font-size:18px;
+}
+
+@keyframes heartBeat{
+    50%{transform:scale(1.3);}
+}
+
+@keyframes introZoom{
+    from{transform:scale(.3);}
+    to{transform:scale(1);}
+}
+
+@keyframes textAppear{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes introHide{
+    to{opacity:0;visibility:hidden;}
+}
+
+/* =========================
+   MAIN
+========================= */
+.main{
+    position:relative;
+    z-index:10;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding:35px 15px 50px;
+}
+
+/* =========================
+   TITLE
+========================= */
+.title{
+    font-size:clamp(42px,9vw,90px);
+    font-weight:900;
+    background:linear-gradient(
+        90deg,
+        #ff4da6,
+        #ffd166,
+        #ffffff,
+        #ff4da6
+    );
+    background-size:300%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:titleGradient 4s infinite,titleFloat 3s infinite;
+    text-shadow:0 0 30px rgba(255,0,150,.5);
+}
+
+@keyframes titleGradient{
+    0%{background-position:0%;}
+    100%{background-position:300%;}
+}
+
+@keyframes titleFloat{
+    50%{transform:translateY(-10px);}
+}
+
+.subtitle{
+    margin-top:5px;
+    font-size:20px;
+    color:#ffd8ec;
+    animation:fadeIn 2s ease;
+}
+
+/* =========================
+   3D CAKE
+========================= */
+.cake-container{
+    margin-top:25px;
+    width:220px;
+    height:180px;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:cakeFloat 3s infinite ease-in-out;
+}
+
+.cake{
+    position:absolute;
+    bottom:20px;
+    left:10px;
+    width:200px;
+    height:85px;
+    border-radius:15px;
+    background:linear-gradient(#ff75a8,#d72c69);
+    box-shadow:0 20px 40px rgba(255,0,100,.5);
+}
+
+.cake::before{
+    content:"";
+    position:absolute;
+    top:-25px;
+    width:200px;
+    height:50px;
+    border-radius:50%;
+    background:#ffb6d5;
+}
+
+.cake::after{
+    content:"";
+    position:absolute;
+    left:15px;
+    right:15px;
+    top:0;
+    height:25px;
+    border-radius:50%;
+    background:white;
+    opacity:.7;
+}
+
+.candles{
+    position:absolute;
+    top:-5px;
+    left:55px;
+    display:flex;
+    gap:25px;
+    z-index:5;
+}
+
+.candle{
+    width:14px;
+    height:60px;
+    background:repeating-linear-gradient(
+        45deg,
+        white 0px,
+        white 7px,
+        #ff3c81 7px,
+        #ff3c81 14px
+    );
+    border-radius:5px;
+    position:relative;
+}
+
+.flame{
+    position:absolute;
+    width:18px;
+    height:27px;
+    left:-2px;
+    top:-27px;
+    background:#ffd166;
+    border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);
+    box-shadow:0 0 10px #ff9900,0 0 30px #ff6600;
+    animation:flame .4s infinite alternate;
+}
+
+@keyframes flame{
+    to{transform:rotate(-45deg) scale(1.2);}
+}
+
+@keyframes cakeFloat{
+    50%{transform:translateY(-12px) rotateY(8deg);}
+}
+
+/* =========================
+   PHOTO SECTION
+========================= */
+.photo-title{
+    margin-top:10px;
+    font-size:28px;
+    color:#ffd166;
+    text-shadow:0 0 15px #ff0080;
+}
+
+.photo-note{
+    margin-top:8px;
+    color:#ffd8ec;
+    font-size:14px;
+    opacity:.9;
+}
+
+.photo-gallery{
+    width:min(950px,95vw);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:22px;
+    margin-top:20px;
+    padding-bottom:30px;
+}
+
+/* PHOTO FRAME */
+.frame{
+    width:145px;
+    height:175px;
+    padding:8px;
+    background:linear-gradient(135deg,#ffd166,#ff4da6,#9b5cff);
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(255,0,120,.5);
+    animation:photoAppear 1s ease forwards,photoFloat 3s infinite ease-in-out;
+    opacity:0;
+    transform:scale(.5) rotate(-10deg);
+    cursor:pointer;
+    transition:transform .3s ease,box-shadow .3s ease;
+}
+
+.frame:hover{
+    transform:scale(1.08) rotate(0deg);
+    box-shadow:0 0 35px #ff4da6;
+}
+
+.frame img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:10px;
+    border:3px solid white;
+    background:#2b1238;
+}
+
+/* If a photo is missing, show a nice placeholder */
+.frame.broken img{
+    object-fit:contain;
+    padding:20px;
+}
+
+.photo-fallback{
+    display:none;
+    width:100%;
+    height:100%;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:8px;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    color:#ffd8ec;
+    font-size:13px;
+}
+
+.frame.broken .photo-fallback{
+    display:flex;
+}
+
+@keyframes photoAppear{
+    to{
+        opacity:1;
+        transform:scale(1) rotate(0);
+    }
+}
+
+@keyframes photoFloat{
+    50%{transform:translateY(-10px) rotate(2deg);}
+}
+
+.frame:nth-child(1){animation-delay:4.5s;}
+.frame:nth-child(2){animation-delay:4.8s;}
+.frame:nth-child(3){animation-delay:5.1s;}
+.frame:nth-child(4){animation-delay:5.4s;}
+.frame:nth-child(5){animation-delay:5.7s;}
+.frame:nth-child(6){animation-delay:6s;}
+
+/* =========================
+   MESSAGE
+========================= */
+.message{
+    width:min(700px,90vw);
+    margin:10px auto 50px;
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 30px rgba(255,0,130,.25);
+    animation:messageGlow 3s infinite alternate;
+}
+
+.message h2{
+    font-size:30px;
+    color:#ffd166;
+    margin-bottom:12px;
+}
+
+.message p{
+    font-size:17px;
+    line-height:1.7;
+    color:#eee;
+}
+
+@keyframes messageGlow{
+    from{box-shadow:0 0 10px #ff0080;}
+    to{box-shadow:0 0 40px #9b5cff;}
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+.heart{
+    position:fixed;
+    bottom:-50px;
+    z-index:50;
+    pointer-events:none;
+    animation:heartUp linear forwards;
+}
+
+@keyframes heartUp{
+    0%{
+        transform:translateY(0) scale(.5) rotate(0);
+        opacity:0;
+    }
+    10%{opacity:1;}
+    50%{
+        transform:translateY(-50vh) scale(1.2) rotate(20deg);
+    }
+    100%{
+        transform:translateY(-110vh) scale(.7) rotate(-20deg);
+        opacity:0;
+    }
+}
+
+/* =========================
+   CONFETTI
+========================= */
+.confetti{
+    position:fixed;
+    top:-20px;
+    width:9px;
+    height:15px;
+    z-index:80;
+    pointer-events:none;
+    animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+/* =========================
+   BUTTON
+========================= */
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    border-radius:40px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    background:linear-gradient(45deg,#ff006e,#8338ec);
+    cursor:pointer;
+    box-shadow:0 0 20px #ff006e;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 40px #ff006e;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media(max-width:600px){
+    .main{
+        padding-top:25px;
+    }
+
+    .photo-gallery{
+        gap:15px;
+    }
+
+    .frame{
+        width:125px;
+        height:155px;
+    }
+
+    .cake-container{
+        transform:scale(.85);
+    }
+
+    .message{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND ANIMATION LAYERS -->
+<div class="background-hearts"></div>
+<div class="stars"></div>
+
+<!-- INTRO -->
+<div class="intro">
+    <div class="intro-heart">💗</div>
+    <h1>A Special Surprise</h1>
+    <p>Wait... Something beautiful is coming ✨</p>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+    <h1 class="title">HAPPY BIRTHDAY MY DEAR SISSYYY...💗</h1>
+
+    <p class="subtitle">🎉 Today is your special day 🎉</p>
+
+    <!-- CAKE -->
+    <div class="cake-container">
+        <div class="cake">
+            <div class="candles">
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTOS -->
+    <h2 class="photo-title">📸 Beautiful Memories ❤️</h2>
+    <p class="photo-note">Put photo1.jpg to photo6.jpg in the same folder as this index.html.</p>
+
+    <div class="photo-gallery">
+
+        <div class="frame">
+            <img src="photo1.jpg" alt="Memory 1"
+                 onerror="showPhotoError(this)">
+            <div class="photo-fallback">📷<span>photo1.jpg</span></div>
+        </div>
+
+        <div class="frame">
+            <img src="photo2.jpg" alt="Memory 2"
+                 onerror="showPhotoError(this)">
+            <div class="photo-fallback">📷<span>photo2.jpg</span></div>
+        </div>
+
+        <div class="frame">
+            <img src="photo3.jpg" alt="Memory 3"
+                 onerror="showPhotoError(this)">
+            <div class="photo-fallback">📷<span>photo3.jpg</span></div>
+        </div>
+
+        <div class="frame">
+            <img src="photo4.jpg" alt="Memory 4"
+                 onerror="showPhotoError(this)">
+            <div class="photo-fallback">📷<span>photo4.jpg</span></div>
+        </div>
+
+        <div class="frame">
+            <img src="photo5.jpg" alt="Memory 5"
+                 onerror="showPhotoError(this)">
+            <div class="photo-fallback">📷<span>photo5.jpg</span></div>
+        </div>
+
+        <div class="frame">
+            <img src="photo6.jpg" alt="Memory 6"
+                 onerror="showPhotoError(this)">
+            <div class="photo-fallback">📷<span>photo6.jpg</span></div>
+        </div>
+
+    </div>
+
+    <!-- MESSAGE -->
+    <section class="message">
+        <h2>🎂 Many Many Happy Returns! 🎂</h2>
+
+        <p>
+            May your life always be filled with
+            happiness, love, laughter and beautiful
+            memories. ❤️
+
+            <br><br>
+
+            May every dream of yours come true
+            and may your smile always shine brighter
+            than the stars. ✨
+
+            <br><br>
+
+            ❤️ Stay Happy • Stay Amazing • Stay Blessed ❤️
+        </p>
+
+        <button onclick="bigSurprise()">
+            🎁 One More Surprise 🎁
+        </button>
+    </section>
+
+</main>
+
+<script>
+/* =================================
+   PHOTO ERROR HANDLER
+================================= */
+function showPhotoError(img){
+    const frame = img.closest(".frame");
+    if(frame){
+        frame.classList.add("broken");
+        img.style.display = "none";
+    }
+}
+
+/* =================================
+   BACKGROUND HEART ANIMATION
+================================= */
+const bgHeartTypes = [
+    "💗","💞","💕","💓",
+    "💖","💘","💝","❤️"
+];
+
+function createBackgroundHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.className = "bg-heart";
+
+    heart.innerHTML =
+        bgHeartTypes[
+            Math.floor(Math.random() * bgHeartTypes.length)
+        ];
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 40) + "px";
+
+    heart.style.animationDuration =
+        (7 + Math.random() * 8) + "s";
+
+    heart.style.animationDelay =
+        Math.random() * 2 + "s";
+
+    document.querySelector(".background-hearts")
+        .appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 16000);
+}
+
+setInterval(createBackgroundHeart,350);
+
+for(let i = 0; i < 25; i++){
+    setTimeout(createBackgroundHeart,i * 150);
+}
+
+/* =================================
+   FLOATING FOREGROUND HEARTS
+================================= */
+const hearts = [
+    "❤️","💖","💕","💗",
+    "💓","💘","💝","💞"
+];
+
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML =
+        hearts[
+            Math.floor(Math.random() * hearts.length)
+        ];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (20 + Math.random() * 35) + "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    },9000);
+}
+
+setInterval(createHeart,250);
+
+/* =================================
+   CONFETTI
+================================= */
+function createConfetti(){
+
+    const c = document.createElement("div");
+
+    c.className = "confetti";
+
+    c.style.left =
+        Math.random() * 100 + "vw";
+
+    c.style.background =
+        `hsl(${Math.random()*360},100%,60%)`;
+
+    c.style.animationDuration =
+        (2 + Math.random() * 3) + "s";
+
+    document.body.appendChild(c);
+
+    setTimeout(() => {
+        c.remove();
+    },5000);
+}
+
+/* FIRST CELEBRATION */
+setTimeout(() => {
+
+    for(let i = 0; i < 80; i++){
+        setTimeout(createConfetti,i * 30);
+    }
+
+},4200);
+
+/* =================================
+   BIG SURPRISE
+================================= */
+function bigSurprise(){
+
+    for(let i = 0; i < 80; i++){
+        setTimeout(createHeart,i * 20);
+    }
+
+    for(let i = 0; i < 150; i++){
+        setTimeout(createConfetti,i * 15);
+    }
+
+    const message = document.createElement("div");
+
+    message.innerHTML =
+        "❤️ HAPPY BIRTHDAY ❤️<br>" +
+        "<small>Have the most amazing day! 🎂✨</small>";
+
+    message.style.position = "fixed";
+    message.style.inset = "0";
+    message.style.display = "flex";
+    message.style.justifyContent = "center";
+    message.style.alignItems = "center";
+    message.style.flexDirection = "column";
+    message.style.textAlign = "center";
+    message.style.fontSize = "50px";
+    message.style.fontWeight = "900";
+    message.style.color = "white";
+    message.style.textShadow =
+        "0 0 20px #ff0080,0 0 50px #ff0080";
+    message.style.background = "rgba(10,0,20,.75)";
+    message.style.zIndex = "500";
+    message.style.padding = "20px";
+
+    document.body.appendChild(message);
+
+    setTimeout(() => {
+        message.remove();
+    },4000);
+}
+
+/* =================================
+   PHOTO CLICK ZOOM
+================================= */
+const frames = document.querySelectorAll(".frame");
+
+frames.forEach((frame) => {
+
+    frame.addEventListener("click",() => {
+
+        frame.style.transform = "scale(1.15)";
+
+        setTimeout(() => {
+            frame.style.transform = "";
+        },700);
+
+    });
+
+});
+</script>
+
+</body>
+</html>
